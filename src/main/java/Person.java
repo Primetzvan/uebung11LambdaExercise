@@ -74,8 +74,14 @@ public class Person {
     @Override
     public String toString() {
 
-
         return this.firstName + " " + this.lastName + " was born on " + this.birthdate +  " and lives in " + this.postcode + " " + this.city;
+    }
+
+    public boolean filterPostcode(){
+
+        return postcode % 2 == 0;
+        //postcode % 2 == 0 ? true : false
 
     }
+
 }

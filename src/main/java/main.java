@@ -6,6 +6,7 @@ import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -15,8 +16,6 @@ public class main {
 
         String fileName = "pupils.csv";
 
-        List<String> lines = null;
-        List<Person> pupils = new ArrayList<>();
 
             try {
                 Files
@@ -31,6 +30,7 @@ public class main {
                                                         Integer.parseInt(lineElement[4]),
                                                         lineElement[5]
                                                         ))
+                        .filter(Person::filterPostcode)
                         .forEach(pupil -> System.out.println(pupil));
 
             } catch (IOException e) {
