@@ -18,25 +18,25 @@ public class main {
 
         System.out.println("Filter: \n");
 
-            try {
-                Files
-                        .readAllLines(Paths.get(fileName), StandardCharsets.UTF_8)
-                        .stream()
-                        .skip(1)
-                        .map(line -> line.split(";"))
-                        .map(lineElement -> new Person( Long.parseLong(lineElement[0]),
-                                                        lineElement[1],
-                                                        lineElement[2],
-                                                        LocalDate.parse(lineElement[3], DateTimeFormatter.ofPattern("dd.MM.yyyy")),
-                                                        Integer.parseInt(lineElement[4]),
-                                                        lineElement[5]
-                                                        ))
-                        .filter(Person::filterPostcode)
-                        .forEach(pupil -> System.out.println(pupil));
+        try {
+            Files
+                    .readAllLines(Paths.get(fileName), StandardCharsets.UTF_8)
+                    .stream()
+                    .skip(1)
+                    .map(line -> line.split(";"))
+                    .map(lineElement -> new Person(Long.parseLong(lineElement[0]),
+                            lineElement[1],
+                            lineElement[2],
+                            LocalDate.parse(lineElement[3], DateTimeFormatter.ofPattern("dd.MM.yyyy")),
+                            Integer.parseInt(lineElement[4]),
+                            lineElement[5]
+                    ))
+                    .filter(Person::filterPostcode)
+                    .forEach(pupil -> System.out.println(pupil));
 
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         System.out.println("\nSort:\n");
 
@@ -46,7 +46,7 @@ public class main {
                     .stream()
                     .skip(1)
                     .map(line -> line.split(";"))
-                    .map(lineElement -> new Person( Long.parseLong(lineElement[0]),
+                    .map(lineElement -> new Person(Long.parseLong(lineElement[0]),
                             lineElement[1],
                             lineElement[2],
                             LocalDate.parse(lineElement[3], DateTimeFormatter.ofPattern("dd.MM.yyyy")),
@@ -66,8 +66,31 @@ public class main {
         }
 
 
+        System.out.println("\nLeondinger Schüler:\n");
+
+
+        try {
+            System.out.println( Files
+                    .readAllLines(Paths.get(fileName), StandardCharsets.UTF_8)
+                    .stream()
+                    .skip(1)
+                    .map(line -> line.split(";"))
+                    .map(lineElement -> new Person(Long.parseLong(lineElement[0]),
+                            lineElement[1],
+                            lineElement[2],
+                            LocalDate.parse(lineElement[3], DateTimeFormatter.ofPattern("dd.MM.yyyy")),
+                            Integer.parseInt(lineElement[4]),
+                            lineElement[5]
+                    ))
+                    .filter(pupil -> pupil.getCity().equals("Leonding"))
+                    .count());
+
+        } catch (IOException e) {
+            e.printStackTrace();
         }
 
+
+    }
 
 
 }
